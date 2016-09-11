@@ -1,0 +1,19 @@
+PREFIX lb-wd: <http://librarybase.wmflabs.org/entity/>
+PREFIX lb-wdt: <http://librarybase.wmflabs.org/prop/direct/>
+PREFIX lb-wikibase: <http://wikiba.se/ontology#>
+PREFIX lb-p: <http://librarybase.wmflabs.org/prop/>
+PREFIX lb-ps: <http://librarybase.wmflabs.org/prop/statement/>
+PREFIX lb-pq: <http://librarybase.wmflabs.org/prop/qualifier/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?item ?itemLabel ?itemDescription ?coords ?websiteString ?contact ?tagsLabel
+WHERE
+{
+    ?item lb-wdt:P19 lb-wd:Q108252 .
+    ?item lb-wdt:P30 lb-wd:$1 .
+    ?item lb-wdt:P24 ?coords .
+    OPTIONAL { ?item lb-wdt:P26 ?websiteString . } .
+    OPTIONAL { ?item lb-wdt:P27 ?contact . } .
+    OPTIONAL { ?item lb-wdt:P28 ?tags . } .
+    SERVICE lb-wikibase:label { bd:serviceParam lb-wikibase:language "en" }
+}
